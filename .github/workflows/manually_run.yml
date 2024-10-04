@@ -35,10 +35,10 @@ jobs:
           echo "Input test_case: '${{ github.event.inputs.test_case }}'"
           if [[ "${{ github.event.inputs.test_case }}" == "case_5" ]]; then
             echo "Running case 5"
-            python -m unittest tests/test_google_finance.py -k "test_symbols_from_ui_not_in_given_data" || true
+            python -m unittest tests/test_google_finance.py -k "test_ui_stocks_not_in_given_data" || true
           elif [[ "${{ github.event.inputs.test_case }}" == "case_6" ]]; then
           echo "Running case 6"
-            python -m unittest tests/test_google_finance.py -k "test_symbols_from_given_data_not_in_ui" || true
+            python -m unittest tests/test_google_finance.py -k "test_given_stocks_data_not_in_ui" || true
           else
             echo "Running all tests"
             python -m unittest discover tests/
