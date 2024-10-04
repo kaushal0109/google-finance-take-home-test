@@ -34,21 +34,21 @@ class GoogleFinanceTest(BaseTest):
         symbols_not_in_ui = self.test_data_set - ui_stock_symbols
         print(f"Step 6. Stock symbols in given test data but not in UI: {symbols_not_in_ui}")
 
-    def test_symbols_from_given_data_not_in_ui(self):
-        # Stock symbols from the UI
-        ui_stock_symbols = set(self.google_finance_page.get_stock_symbols())
-
-        # Display stock symbols not in UI
-        symbols_not_in_ui = self.test_data_set - ui_stock_symbols
-        print(f"Step 6. Stock symbols in given test data but not in UI: {symbols_not_in_ui}")
-
     def test_symbols_from_ui_not_in_given_data(self):
         # Stock symbols from the UI
         ui_stock_symbols = set(self.google_finance_page.get_stock_symbols())
 
         # Display stock symbols not in given data
         symbols_not_in_test_data = ui_stock_symbols - self.test_data_set
-        print(f"Step 5. Stock symbols in UI but not in given test data: {symbols_not_in_test_data}")
+        print(f"TestCase-5. Stock in UI but not in test data: {symbols_not_in_test_data}")
+
+    def test_symbols_from_given_data_not_in_ui(self):
+        # Stock symbols from the UI
+        ui_stock_symbols = set(self.google_finance_page.get_stock_symbols())
+
+        # Display stock symbols not in UI
+        symbols_not_in_ui = self.test_data_set - ui_stock_symbols
+        print(f"TestCase 6. Stock in test data but not in UI: {symbols_not_in_ui}")
 
 
 if __name__ == "__main__":
