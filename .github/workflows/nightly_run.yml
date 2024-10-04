@@ -2,13 +2,12 @@ name: Nightly Test Workflow
 
 on:
   schedule:
-    - cron: '41 22 * * *'  # Runs every day at midnight UTC
-  workflow_dispatch:
+    #- cron: '0 0 * * *'  # Runs every day at midnight
+  - cron: '48 22 * * *'  # Runs every day at midnight
 
 jobs:
-  run-tests:
+  test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
