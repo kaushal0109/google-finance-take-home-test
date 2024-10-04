@@ -1,0 +1,44 @@
+name: Manual Test Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_case:
+        description: 'Choose the test case to run'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - case_5
+          - case_6
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          echo "Input test_case: '${{ github.event.inputs.test_case }}'"
+          if [[ "${{ github.event.inputs.test_case }}" == "case_5" ]]; then
+            echo "Running case 5 and 6"
+            python -m unittest tests/test_google_finance.py -k "test_symbols_from_given_data_not_in_ui" || true
+          elif [[ "${{ github.event.inputs.test_case }}" == "case_6" ]]; then
+            python -m unittest tests/test_google_finance.py -k "test_symbols_from_ui_not_in_given_data" || true
+          else
+            echo "Running all tests"
+            python -m unittest discover tests/
+          fi
