@@ -15,7 +15,6 @@ class BaseTest(unittest.TestCase):
         self.driver = webdriver.Chrome(options=chrome_options)
         self.driver.implicitly_wait(10)
 
-
     def load_config(self):
         config = {}
 
